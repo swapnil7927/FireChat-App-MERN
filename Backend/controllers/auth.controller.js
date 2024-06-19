@@ -12,7 +12,7 @@ export const signup = async (req, res) => {
 
         const user = await User.findOne({username})
         if(user){
-            return res.status(400).json({error:"Username already exsits"})
+            return res.status(400).json({error:"Username already exists"})
         }
 
         // HASH PASSWORD HERE
@@ -27,7 +27,7 @@ export const signup = async (req, res) => {
             username,
             password: hashedPassword,
             gender,
-            profilePic: gender === "male" ? boyProfilePic : girlProfilePic
+            profilePic: gender === "male" ? boyProfilePic : girlProfilePic,
         })
          
         if(newUser){
@@ -39,7 +39,7 @@ export const signup = async (req, res) => {
             _id: newUser._id,
             fullName: newUser.fullName,
             username: newUser.username,
-            profilePic: newUser.profilePic
+            profilePic: newUser.profilePic,
          })
         } else{
             res.status(400).json({error: "Invalid User data"});
